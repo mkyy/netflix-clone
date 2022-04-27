@@ -1,5 +1,5 @@
-import { renderMovies } from "./movies.js";
-import { renderPrincipalMovie } from "./principal.js";
+import { renderMovies } from './movies.js';
+import { renderPrincipalMovie } from './principal.js';
 
 function App() {
   renderPrincipalMovie();

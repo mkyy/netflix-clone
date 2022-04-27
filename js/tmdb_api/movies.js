@@ -1,15 +1,18 @@
-import { getPopularMovies } from "./api.js";
-import { config } from "./config.js";
+import { getPopularMovies } from './api.js';
+import { config } from './config.js';
 
-const moviesDiv = document.getElementById("movies-div");
+const moviesDiv = document.getElementById('movies-div');
 
 export async function renderMovies() {
   const movies = await getPopularMovies();
-  moviesDiv.innerHTML = movies
-    .map((movie) => renderSingleMovie(movie))
-    .join("");
+  console.log(movies);
+  const moviesToInner = movies.map(movie => {
+    return renderSingleMovie(movie, movie.title, movie.overview, movie.backdrop_path);
+  });
 
-  $(".owl-carousel").owlCarousel({
+  moviesDiv.innerHTML = moviesToInner.join('');
+
+  $('.owl-carousel').owlCarousel({
     loop: true,
     margin: 10,
     nav: false,
@@ -27,12 +30,12 @@ export async function renderMovies() {
   });
 }
 
-function renderSingleMovie(movie) {
+function renderSingleMovie(movie, title, overview, backdrop) {
   return `
-        <div class="item">
-          <img class="box-filme" src="${
-            config.IMAGE_BASE_URL + movie.poster_path
-          }" alt="" srcset="" />
+        <div id='${movie.id}' class="item">
+          <img onclick="handleClick('${title}', '${overview}', '${backdrop}',)" class="box-filme" src="${
+    config.IMAGE_BASE_URL + movie.poster_path
+  }" alt="" srcset="" />
         </div>
         `;
 }

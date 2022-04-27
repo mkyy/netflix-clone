@@ -1,13 +1,12 @@
-import { getPopularMovies } from "./api.js";
-import { config } from "./config.js";
+import { getPopularMovies } from './api.js';
+import { config } from './config.js';
 
-const principalDiv = document.querySelector(".main");
+const principalDiv = document.querySelector('.main');
 
 export async function renderPrincipalMovie() {
   const movies = await getPopularMovies();
   const maxMoviesPerPage = 20;
   const randomMovie = movies[Math.floor(Math.random() * maxMoviesPerPage)];
-  console.log(randomMovie);
 
   principalDiv.innerHTML = `
   <div
